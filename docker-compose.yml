@@ -11,6 +11,15 @@ services:
       - 5432:5432
     networks:
       - feature-net
+  
+  redis:
+    container_name: user-service-redis
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    networks:
+      - feature-net
 
 networks:
   feature-net:
