@@ -27,7 +27,7 @@ Create a `.env` file in the project root with the following variables:
 HTTP_PORT=8080
 HTTP_HOST=0.0.0.0
 LOG_PATH=/var/log
-RUNTIME=dev
+RUNTIME=dev | prod
 REDIS_URL=redis://user-service-redis:6379/2
 DATABASE_URL=postgresql://<POSTGRES_USER>:<POSTGRES_PASSWORD>@postgres:5432/feature
 ```
