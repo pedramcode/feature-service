@@ -1,4 +1,17 @@
 services:
+  feature-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: feature-service
+    env_file:
+      - .env
+    restart: on-failure
+    ports:
+      - 8080:8080
+    networks:
+      - feature-net
+
   postgres:
     image: postgres:16-alpine
     container_name: postgres

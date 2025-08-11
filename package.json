@@ -5,7 +5,8 @@
   "scripts": {
     "start:dev": "nodemon src/server.ts",
     "start:prod": "ts-node src/server.ts",
-    "format": "npx prettier ./src --write"
+    "format": "npx prettier ./src --write",
+    "db:deploy": "npx prisma migrate deploy && npx prisma generate"
   },
   "keywords": [],
   "author": "",
