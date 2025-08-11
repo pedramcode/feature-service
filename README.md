@@ -61,6 +61,14 @@ The feature toggle service (Node.js/Express)
 PostgreSQL database
 Redis cache
 
+## Test
+
+For running tests run
+
+```bash
+npm run test
+```
+
 # API Endpoints
 
 ## Health Check
