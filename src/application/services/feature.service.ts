@@ -7,7 +7,6 @@ import {
 
 // recursive private function to check if feature get active
 async function _canActivate(_key: string): Promise<boolean> {
-    // Step 1: Get the feature with its direct dependencies
     const feature = await prisma.feature.findUnique({
         where: { key: _key },
         include: { dependencies: true },
@@ -17,13 +16,12 @@ async function _canActivate(_key: string): Promise<boolean> {
         throw new NotFoundError(`feature "${_key}"`);
     }
 
-    // Step 2: Recursive check function
     async function checkDependencies(
         dependencies: { key: string; isActive: boolean }[],
         visited = new Set<string>(),
     ): Promise<boolean> {
         for (const dep of dependencies) {
-            if (visited.has(dep.key)) continue; // Prevent infinite loop in case of accidental cycles
+            if (visited.has(dep.key)) continue;
             visited.add(dep.key);
 
             if (!dep.isActive) return false;
@@ -42,12 +40,11 @@ async function _canActivate(_key: string): Promise<boolean> {
         return true;
     }
 
-    // Step 3: Start recursive check
     return await checkDependencies(feature.dependencies);
 }
 
+// recursive deactivation
 async function _deactiveDependents(key: string, visited = new Set<string>()) {
-    // Step 1: Find the target feature with dependents
     const feature = await prisma.feature.findUnique({
         where: { key },
         include: { dependents: true },
@@ -57,22 +54,18 @@ async function _deactiveDependents(key: string, visited = new Set<string>()) {
         throw new NotFoundError(`feature "${key}"`);
     }
 
-    // Step 2: Avoid infinite recursion (cycle protection)
     if (visited.has(key)) {
         return;
     }
     visited.add(key);
 
-    // Step 3: Loop through dependents
     for (const dep of feature.dependents) {
         if (dep.isActive) {
-            // Deactivate dependent
             await prisma.feature.update({
                 where: { id: dep.id },
                 data: { isActive: false },
             });
 
-            // Recursively deactivate its dependents
             await _deactiveDependents(dep.key, visited);
         }
     }
