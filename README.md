@@ -65,20 +65,25 @@ Redis cache
 
 ## Health Check
 * GET /ping
+
     Returns PONG if the service is running.
 
 ## Feature Management
 
 * POST /api/feature
+
     Create a new feature toggle.
 
 * GET /api/feature
+
     List all features.
 
 * PUT /api/feature/on/:key
+
     Activate a feature (with dependency checks).
 
 * PUT /api/feature/off/:key
+
     Deactivate a feature (recursively deactivates dependents).
 
 
