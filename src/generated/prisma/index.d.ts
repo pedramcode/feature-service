@@ -877,6 +877,45 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type FeatureCountOutputType
+   */
+
+  export type FeatureCountOutputType = {
+    dependencies: number
+    dependents: number
+  }
+
+  export type FeatureCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dependencies?: boolean | FeatureCountOutputTypeCountDependenciesArgs
+    dependents?: boolean | FeatureCountOutputTypeCountDependentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FeatureCountOutputType without action
+   */
+  export type FeatureCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FeatureCountOutputType
+     */
+    select?: FeatureCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FeatureCountOutputType without action
+   */
+  export type FeatureCountOutputTypeCountDependenciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FeatureWhereInput
+  }
+
+  /**
+   * FeatureCountOutputType without action
+   */
+  export type FeatureCountOutputTypeCountDependentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FeatureWhereInput
+  }
+
 
   /**
    * Models
@@ -894,6 +933,8 @@ export namespace Prisma {
 
   export type FeatureMinAggregateOutputType = {
     id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     key: string | null
     isActive: boolean | null
     desc: string | null
@@ -901,6 +942,8 @@ export namespace Prisma {
 
   export type FeatureMaxAggregateOutputType = {
     id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     key: string | null
     isActive: boolean | null
     desc: string | null
@@ -908,6 +951,8 @@ export namespace Prisma {
 
   export type FeatureCountAggregateOutputType = {
     id: number
+    createdAt: number
+    updatedAt: number
     key: number
     isActive: number
     desc: number
@@ -917,6 +962,8 @@ export namespace Prisma {
 
   export type FeatureMinAggregateInputType = {
     id?: true
+    createdAt?: true
+    updatedAt?: true
     key?: true
     isActive?: true
     desc?: true
@@ -924,6 +971,8 @@ export namespace Prisma {
 
   export type FeatureMaxAggregateInputType = {
     id?: true
+    createdAt?: true
+    updatedAt?: true
     key?: true
     isActive?: true
     desc?: true
@@ -931,6 +980,8 @@ export namespace Prisma {
 
   export type FeatureCountAggregateInputType = {
     id?: true
+    createdAt?: true
+    updatedAt?: true
     key?: true
     isActive?: true
     desc?: true
@@ -1011,6 +1062,8 @@ export namespace Prisma {
 
   export type FeatureGroupByOutputType = {
     id: string
+    createdAt: Date
+    updatedAt: Date
     key: string
     isActive: boolean
     desc: string | null
@@ -1035,13 +1088,20 @@ export namespace Prisma {
 
   export type FeatureSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     key?: boolean
     isActive?: boolean
     desc?: boolean
+    dependencies?: boolean | Feature$dependenciesArgs<ExtArgs>
+    dependents?: boolean | Feature$dependentsArgs<ExtArgs>
+    _count?: boolean | FeatureCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["feature"]>
 
   export type FeatureSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     key?: boolean
     isActive?: boolean
     desc?: boolean
@@ -1049,6 +1109,8 @@ export namespace Prisma {
 
   export type FeatureSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     key?: boolean
     isActive?: boolean
     desc?: boolean
@@ -1056,18 +1118,32 @@ export namespace Prisma {
 
   export type FeatureSelectScalar = {
     id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     key?: boolean
     isActive?: boolean
     desc?: boolean
   }
 
-  export type FeatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "isActive" | "desc", ExtArgs["result"]["feature"]>
+  export type FeatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "key" | "isActive" | "desc", ExtArgs["result"]["feature"]>
+  export type FeatureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dependencies?: boolean | Feature$dependenciesArgs<ExtArgs>
+    dependents?: boolean | Feature$dependentsArgs<ExtArgs>
+    _count?: boolean | FeatureCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type FeatureIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type FeatureIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $FeaturePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Feature"
-    objects: {}
+    objects: {
+      dependencies: Prisma.$FeaturePayload<ExtArgs>[]
+      dependents: Prisma.$FeaturePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      createdAt: Date
+      updatedAt: Date
       key: string
       isActive: boolean
       desc: string | null
@@ -1465,6 +1541,8 @@ export namespace Prisma {
    */
   export interface Prisma__FeatureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    dependencies<T extends Feature$dependenciesArgs<ExtArgs> = {}>(args?: Subset<T, Feature$dependenciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dependents<T extends Feature$dependentsArgs<ExtArgs> = {}>(args?: Subset<T, Feature$dependentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1495,6 +1573,8 @@ export namespace Prisma {
    */
   interface FeatureFieldRefs {
     readonly id: FieldRef<"Feature", 'String'>
+    readonly createdAt: FieldRef<"Feature", 'DateTime'>
+    readonly updatedAt: FieldRef<"Feature", 'DateTime'>
     readonly key: FieldRef<"Feature", 'String'>
     readonly isActive: FieldRef<"Feature", 'Boolean'>
     readonly desc: FieldRef<"Feature", 'String'>
@@ -1515,6 +1595,10 @@ export namespace Prisma {
      */
     omit?: FeatureOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
+    /**
      * Filter, which Feature to fetch.
      */
     where: FeatureWhereUniqueInput
@@ -1533,6 +1617,10 @@ export namespace Prisma {
      */
     omit?: FeatureOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
+    /**
      * Filter, which Feature to fetch.
      */
     where: FeatureWhereUniqueInput
@@ -1550,6 +1638,10 @@ export namespace Prisma {
      * Omit specific fields from the Feature
      */
     omit?: FeatureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
     /**
      * Filter, which Feature to fetch.
      */
@@ -1599,6 +1691,10 @@ export namespace Prisma {
      */
     omit?: FeatureOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
+    /**
      * Filter, which Feature to fetch.
      */
     where?: FeatureWhereInput
@@ -1647,6 +1743,10 @@ export namespace Prisma {
      */
     omit?: FeatureOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
+    /**
      * Filter, which Features to fetch.
      */
     where?: FeatureWhereInput
@@ -1689,6 +1789,10 @@ export namespace Prisma {
      * Omit specific fields from the Feature
      */
     omit?: FeatureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
     /**
      * The data needed to create a Feature.
      */
@@ -1737,6 +1841,10 @@ export namespace Prisma {
      * Omit specific fields from the Feature
      */
     omit?: FeatureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
     /**
      * The data needed to update a Feature.
      */
@@ -1804,6 +1912,10 @@ export namespace Prisma {
      */
     omit?: FeatureOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
+    /**
      * The filter to search for the Feature to update in case it exists.
      */
     where: FeatureWhereUniqueInput
@@ -1830,6 +1942,10 @@ export namespace Prisma {
      */
     omit?: FeatureOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
+    /**
      * Filter which Feature to delete.
      */
     where: FeatureWhereUniqueInput
@@ -1850,6 +1966,54 @@ export namespace Prisma {
   }
 
   /**
+   * Feature.dependencies
+   */
+  export type Feature$dependenciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Feature
+     */
+    select?: FeatureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Feature
+     */
+    omit?: FeatureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
+    where?: FeatureWhereInput
+    orderBy?: FeatureOrderByWithRelationInput | FeatureOrderByWithRelationInput[]
+    cursor?: FeatureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FeatureScalarFieldEnum | FeatureScalarFieldEnum[]
+  }
+
+  /**
+   * Feature.dependents
+   */
+  export type Feature$dependentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Feature
+     */
+    select?: FeatureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Feature
+     */
+    omit?: FeatureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
+    where?: FeatureWhereInput
+    orderBy?: FeatureOrderByWithRelationInput | FeatureOrderByWithRelationInput[]
+    cursor?: FeatureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FeatureScalarFieldEnum | FeatureScalarFieldEnum[]
+  }
+
+  /**
    * Feature without action
    */
   export type FeatureDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1861,6 +2025,10 @@ export namespace Prisma {
      * Omit specific fields from the Feature
      */
     omit?: FeatureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FeatureInclude<ExtArgs> | null
   }
 
 
@@ -1880,6 +2048,8 @@ export namespace Prisma {
 
   export const FeatureScalarFieldEnum: {
     id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     key: 'key',
     isActive: 'isActive',
     desc: 'desc'
@@ -1932,6 +2102,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -1960,16 +2144,24 @@ export namespace Prisma {
     OR?: FeatureWhereInput[]
     NOT?: FeatureWhereInput | FeatureWhereInput[]
     id?: UuidFilter<"Feature"> | string
+    createdAt?: DateTimeFilter<"Feature"> | Date | string
+    updatedAt?: DateTimeFilter<"Feature"> | Date | string
     key?: StringFilter<"Feature"> | string
     isActive?: BoolFilter<"Feature"> | boolean
     desc?: StringNullableFilter<"Feature"> | string | null
+    dependencies?: FeatureListRelationFilter
+    dependents?: FeatureListRelationFilter
   }
 
   export type FeatureOrderByWithRelationInput = {
     id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     key?: SortOrder
     isActive?: SortOrder
     desc?: SortOrderInput | SortOrder
+    dependencies?: FeatureOrderByRelationAggregateInput
+    dependents?: FeatureOrderByRelationAggregateInput
   }
 
   export type FeatureWhereUniqueInput = Prisma.AtLeast<{
@@ -1978,12 +2170,18 @@ export namespace Prisma {
     AND?: FeatureWhereInput | FeatureWhereInput[]
     OR?: FeatureWhereInput[]
     NOT?: FeatureWhereInput | FeatureWhereInput[]
+    createdAt?: DateTimeFilter<"Feature"> | Date | string
+    updatedAt?: DateTimeFilter<"Feature"> | Date | string
     isActive?: BoolFilter<"Feature"> | boolean
     desc?: StringNullableFilter<"Feature"> | string | null
+    dependencies?: FeatureListRelationFilter
+    dependents?: FeatureListRelationFilter
   }, "id" | "key">
 
   export type FeatureOrderByWithAggregationInput = {
     id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     key?: SortOrder
     isActive?: SortOrder
     desc?: SortOrderInput | SortOrder
@@ -1997,6 +2195,8 @@ export namespace Prisma {
     OR?: FeatureScalarWhereWithAggregatesInput[]
     NOT?: FeatureScalarWhereWithAggregatesInput | FeatureScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Feature"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Feature"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Feature"> | Date | string
     key?: StringWithAggregatesFilter<"Feature"> | string
     isActive?: BoolWithAggregatesFilter<"Feature"> | boolean
     desc?: StringNullableWithAggregatesFilter<"Feature"> | string | null
@@ -2004,34 +2204,52 @@ export namespace Prisma {
 
   export type FeatureCreateInput = {
     id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     key: string
     isActive?: boolean
     desc?: string | null
+    dependencies?: FeatureCreateNestedManyWithoutDependentsInput
+    dependents?: FeatureCreateNestedManyWithoutDependenciesInput
   }
 
   export type FeatureUncheckedCreateInput = {
     id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     key: string
     isActive?: boolean
     desc?: string | null
+    dependencies?: FeatureUncheckedCreateNestedManyWithoutDependentsInput
+    dependents?: FeatureUncheckedCreateNestedManyWithoutDependenciesInput
   }
 
   export type FeatureUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     key?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     desc?: NullableStringFieldUpdateOperationsInput | string | null
+    dependencies?: FeatureUpdateManyWithoutDependentsNestedInput
+    dependents?: FeatureUpdateManyWithoutDependenciesNestedInput
   }
 
   export type FeatureUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     key?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     desc?: NullableStringFieldUpdateOperationsInput | string | null
+    dependencies?: FeatureUncheckedUpdateManyWithoutDependentsNestedInput
+    dependents?: FeatureUncheckedUpdateManyWithoutDependenciesNestedInput
   }
 
   export type FeatureCreateManyInput = {
     id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     key: string
     isActive?: boolean
     desc?: string | null
@@ -2039,6 +2257,8 @@ export namespace Prisma {
 
   export type FeatureUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     key?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     desc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -2046,6 +2266,8 @@ export namespace Prisma {
 
   export type FeatureUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     key?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     desc?: NullableStringFieldUpdateOperationsInput | string | null
@@ -2061,6 +2283,17 @@ export namespace Prisma {
     gte?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2098,13 +2331,25 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type FeatureListRelationFilter = {
+    every?: FeatureWhereInput
+    some?: FeatureWhereInput
+    none?: FeatureWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
+  export type FeatureOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type FeatureCountOrderByAggregateInput = {
     id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     key?: SortOrder
     isActive?: SortOrder
     desc?: SortOrder
@@ -2112,6 +2357,8 @@ export namespace Prisma {
 
   export type FeatureMaxOrderByAggregateInput = {
     id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     key?: SortOrder
     isActive?: SortOrder
     desc?: SortOrder
@@ -2119,6 +2366,8 @@ export namespace Prisma {
 
   export type FeatureMinOrderByAggregateInput = {
     id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     key?: SortOrder
     isActive?: SortOrder
     desc?: SortOrder
@@ -2137,6 +2386,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2183,8 +2446,36 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type FeatureCreateNestedManyWithoutDependentsInput = {
+    create?: XOR<FeatureCreateWithoutDependentsInput, FeatureUncheckedCreateWithoutDependentsInput> | FeatureCreateWithoutDependentsInput[] | FeatureUncheckedCreateWithoutDependentsInput[]
+    connectOrCreate?: FeatureCreateOrConnectWithoutDependentsInput | FeatureCreateOrConnectWithoutDependentsInput[]
+    connect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+  }
+
+  export type FeatureCreateNestedManyWithoutDependenciesInput = {
+    create?: XOR<FeatureCreateWithoutDependenciesInput, FeatureUncheckedCreateWithoutDependenciesInput> | FeatureCreateWithoutDependenciesInput[] | FeatureUncheckedCreateWithoutDependenciesInput[]
+    connectOrCreate?: FeatureCreateOrConnectWithoutDependenciesInput | FeatureCreateOrConnectWithoutDependenciesInput[]
+    connect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+  }
+
+  export type FeatureUncheckedCreateNestedManyWithoutDependentsInput = {
+    create?: XOR<FeatureCreateWithoutDependentsInput, FeatureUncheckedCreateWithoutDependentsInput> | FeatureCreateWithoutDependentsInput[] | FeatureUncheckedCreateWithoutDependentsInput[]
+    connectOrCreate?: FeatureCreateOrConnectWithoutDependentsInput | FeatureCreateOrConnectWithoutDependentsInput[]
+    connect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+  }
+
+  export type FeatureUncheckedCreateNestedManyWithoutDependenciesInput = {
+    create?: XOR<FeatureCreateWithoutDependenciesInput, FeatureUncheckedCreateWithoutDependenciesInput> | FeatureCreateWithoutDependenciesInput[] | FeatureUncheckedCreateWithoutDependenciesInput[]
+    connectOrCreate?: FeatureCreateOrConnectWithoutDependenciesInput | FeatureCreateOrConnectWithoutDependenciesInput[]
+    connect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -2193,6 +2484,58 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type FeatureUpdateManyWithoutDependentsNestedInput = {
+    create?: XOR<FeatureCreateWithoutDependentsInput, FeatureUncheckedCreateWithoutDependentsInput> | FeatureCreateWithoutDependentsInput[] | FeatureUncheckedCreateWithoutDependentsInput[]
+    connectOrCreate?: FeatureCreateOrConnectWithoutDependentsInput | FeatureCreateOrConnectWithoutDependentsInput[]
+    upsert?: FeatureUpsertWithWhereUniqueWithoutDependentsInput | FeatureUpsertWithWhereUniqueWithoutDependentsInput[]
+    set?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    disconnect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    delete?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    connect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    update?: FeatureUpdateWithWhereUniqueWithoutDependentsInput | FeatureUpdateWithWhereUniqueWithoutDependentsInput[]
+    updateMany?: FeatureUpdateManyWithWhereWithoutDependentsInput | FeatureUpdateManyWithWhereWithoutDependentsInput[]
+    deleteMany?: FeatureScalarWhereInput | FeatureScalarWhereInput[]
+  }
+
+  export type FeatureUpdateManyWithoutDependenciesNestedInput = {
+    create?: XOR<FeatureCreateWithoutDependenciesInput, FeatureUncheckedCreateWithoutDependenciesInput> | FeatureCreateWithoutDependenciesInput[] | FeatureUncheckedCreateWithoutDependenciesInput[]
+    connectOrCreate?: FeatureCreateOrConnectWithoutDependenciesInput | FeatureCreateOrConnectWithoutDependenciesInput[]
+    upsert?: FeatureUpsertWithWhereUniqueWithoutDependenciesInput | FeatureUpsertWithWhereUniqueWithoutDependenciesInput[]
+    set?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    disconnect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    delete?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    connect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    update?: FeatureUpdateWithWhereUniqueWithoutDependenciesInput | FeatureUpdateWithWhereUniqueWithoutDependenciesInput[]
+    updateMany?: FeatureUpdateManyWithWhereWithoutDependenciesInput | FeatureUpdateManyWithWhereWithoutDependenciesInput[]
+    deleteMany?: FeatureScalarWhereInput | FeatureScalarWhereInput[]
+  }
+
+  export type FeatureUncheckedUpdateManyWithoutDependentsNestedInput = {
+    create?: XOR<FeatureCreateWithoutDependentsInput, FeatureUncheckedCreateWithoutDependentsInput> | FeatureCreateWithoutDependentsInput[] | FeatureUncheckedCreateWithoutDependentsInput[]
+    connectOrCreate?: FeatureCreateOrConnectWithoutDependentsInput | FeatureCreateOrConnectWithoutDependentsInput[]
+    upsert?: FeatureUpsertWithWhereUniqueWithoutDependentsInput | FeatureUpsertWithWhereUniqueWithoutDependentsInput[]
+    set?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    disconnect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    delete?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    connect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    update?: FeatureUpdateWithWhereUniqueWithoutDependentsInput | FeatureUpdateWithWhereUniqueWithoutDependentsInput[]
+    updateMany?: FeatureUpdateManyWithWhereWithoutDependentsInput | FeatureUpdateManyWithWhereWithoutDependentsInput[]
+    deleteMany?: FeatureScalarWhereInput | FeatureScalarWhereInput[]
+  }
+
+  export type FeatureUncheckedUpdateManyWithoutDependenciesNestedInput = {
+    create?: XOR<FeatureCreateWithoutDependenciesInput, FeatureUncheckedCreateWithoutDependenciesInput> | FeatureCreateWithoutDependenciesInput[] | FeatureUncheckedCreateWithoutDependenciesInput[]
+    connectOrCreate?: FeatureCreateOrConnectWithoutDependenciesInput | FeatureCreateOrConnectWithoutDependenciesInput[]
+    upsert?: FeatureUpsertWithWhereUniqueWithoutDependenciesInput | FeatureUpsertWithWhereUniqueWithoutDependenciesInput[]
+    set?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    disconnect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    delete?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    connect?: FeatureWhereUniqueInput | FeatureWhereUniqueInput[]
+    update?: FeatureUpdateWithWhereUniqueWithoutDependenciesInput | FeatureUpdateWithWhereUniqueWithoutDependenciesInput[]
+    updateMany?: FeatureUpdateManyWithWhereWithoutDependenciesInput | FeatureUpdateManyWithWhereWithoutDependenciesInput[]
+    deleteMany?: FeatureScalarWhereInput | FeatureScalarWhereInput[]
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -2204,6 +2547,17 @@ export namespace Prisma {
     gt?: string | StringFieldRefInput<$PrismaModel>
     gte?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2264,6 +2618,20 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2315,6 +2683,158 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type FeatureCreateWithoutDependentsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    key: string
+    isActive?: boolean
+    desc?: string | null
+    dependencies?: FeatureCreateNestedManyWithoutDependentsInput
+  }
+
+  export type FeatureUncheckedCreateWithoutDependentsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    key: string
+    isActive?: boolean
+    desc?: string | null
+    dependencies?: FeatureUncheckedCreateNestedManyWithoutDependentsInput
+  }
+
+  export type FeatureCreateOrConnectWithoutDependentsInput = {
+    where: FeatureWhereUniqueInput
+    create: XOR<FeatureCreateWithoutDependentsInput, FeatureUncheckedCreateWithoutDependentsInput>
+  }
+
+  export type FeatureCreateWithoutDependenciesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    key: string
+    isActive?: boolean
+    desc?: string | null
+    dependents?: FeatureCreateNestedManyWithoutDependenciesInput
+  }
+
+  export type FeatureUncheckedCreateWithoutDependenciesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    key: string
+    isActive?: boolean
+    desc?: string | null
+    dependents?: FeatureUncheckedCreateNestedManyWithoutDependenciesInput
+  }
+
+  export type FeatureCreateOrConnectWithoutDependenciesInput = {
+    where: FeatureWhereUniqueInput
+    create: XOR<FeatureCreateWithoutDependenciesInput, FeatureUncheckedCreateWithoutDependenciesInput>
+  }
+
+  export type FeatureUpsertWithWhereUniqueWithoutDependentsInput = {
+    where: FeatureWhereUniqueInput
+    update: XOR<FeatureUpdateWithoutDependentsInput, FeatureUncheckedUpdateWithoutDependentsInput>
+    create: XOR<FeatureCreateWithoutDependentsInput, FeatureUncheckedCreateWithoutDependentsInput>
+  }
+
+  export type FeatureUpdateWithWhereUniqueWithoutDependentsInput = {
+    where: FeatureWhereUniqueInput
+    data: XOR<FeatureUpdateWithoutDependentsInput, FeatureUncheckedUpdateWithoutDependentsInput>
+  }
+
+  export type FeatureUpdateManyWithWhereWithoutDependentsInput = {
+    where: FeatureScalarWhereInput
+    data: XOR<FeatureUpdateManyMutationInput, FeatureUncheckedUpdateManyWithoutDependentsInput>
+  }
+
+  export type FeatureScalarWhereInput = {
+    AND?: FeatureScalarWhereInput | FeatureScalarWhereInput[]
+    OR?: FeatureScalarWhereInput[]
+    NOT?: FeatureScalarWhereInput | FeatureScalarWhereInput[]
+    id?: UuidFilter<"Feature"> | string
+    createdAt?: DateTimeFilter<"Feature"> | Date | string
+    updatedAt?: DateTimeFilter<"Feature"> | Date | string
+    key?: StringFilter<"Feature"> | string
+    isActive?: BoolFilter<"Feature"> | boolean
+    desc?: StringNullableFilter<"Feature"> | string | null
+  }
+
+  export type FeatureUpsertWithWhereUniqueWithoutDependenciesInput = {
+    where: FeatureWhereUniqueInput
+    update: XOR<FeatureUpdateWithoutDependenciesInput, FeatureUncheckedUpdateWithoutDependenciesInput>
+    create: XOR<FeatureCreateWithoutDependenciesInput, FeatureUncheckedCreateWithoutDependenciesInput>
+  }
+
+  export type FeatureUpdateWithWhereUniqueWithoutDependenciesInput = {
+    where: FeatureWhereUniqueInput
+    data: XOR<FeatureUpdateWithoutDependenciesInput, FeatureUncheckedUpdateWithoutDependenciesInput>
+  }
+
+  export type FeatureUpdateManyWithWhereWithoutDependenciesInput = {
+    where: FeatureScalarWhereInput
+    data: XOR<FeatureUpdateManyMutationInput, FeatureUncheckedUpdateManyWithoutDependenciesInput>
+  }
+
+  export type FeatureUpdateWithoutDependentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    dependencies?: FeatureUpdateManyWithoutDependentsNestedInput
+  }
+
+  export type FeatureUncheckedUpdateWithoutDependentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    dependencies?: FeatureUncheckedUpdateManyWithoutDependentsNestedInput
+  }
+
+  export type FeatureUncheckedUpdateManyWithoutDependentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FeatureUpdateWithoutDependenciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    dependents?: FeatureUpdateManyWithoutDependenciesNestedInput
+  }
+
+  export type FeatureUncheckedUpdateWithoutDependenciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    dependents?: FeatureUncheckedUpdateManyWithoutDependenciesNestedInput
+  }
+
+  export type FeatureUncheckedUpdateManyWithoutDependenciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    key?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
